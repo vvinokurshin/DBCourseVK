@@ -10,7 +10,7 @@ FROM ubuntu:20.04
 COPY . .
 
 RUN apt-get -y update && apt-get install -y tzdata
-RUN ln -snf /usr/share/zoneinfo/Russia/Moscow /etc/localtime && echo Russia/Moscow > /etc/timezone
+RUN ln -snf /usr/share/zoneinfo/Russia/Moscow /etc/localtime && echo $TZ > /etc/timezone
 
 ENV PGVER 12
 RUN apt-get -y update && apt-get install -y postgresql-$PGVER
