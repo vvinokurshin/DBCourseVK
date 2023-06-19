@@ -30,11 +30,10 @@ func (repo *Repository) InsertThread(thread *models.Thread) error {
 		rows, err = repo.DB.NamedQuery(`INSERT INTO threads (title,author,forum,message,slug,created) VALUES (:title,:author,:forum,:message,:slug,:created) RETURNING id`,
 			thread)
 	}
-	defer rows.Close()
-
 	if err != nil {
 		return errors.Wrap(err, "database error (table: forums, method: InsertForum)")
 	}
+	defer rows.Close()
 
 	rows.Next()
 	err = rows.Scan(&thread.ID)

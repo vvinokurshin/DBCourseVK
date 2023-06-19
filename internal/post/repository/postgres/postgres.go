@@ -22,11 +22,10 @@ func NewRepository(db *sqlx.DB) repository.RepositoryI {
 func (repo *Repository) InsertPosts(posts []models.Post) error {
 	rows, err := repo.DB.NamedQuery(`INSERT INTO posts (parent,author,message,is_edited,forum,thread,created) 
 VALUES (:parent,:author,:message,:is_edited,:forum,:thread,:created) RETURNING id`, posts)
-	defer rows.Close()
-
 	if err != nil {
 		return errors.Wrap(err, "database error (table: posts, method: InsertPosts)")
 	}
+	defer rows.Close()
 
 	for idx := range posts {
 		rows.Next()

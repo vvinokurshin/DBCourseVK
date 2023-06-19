@@ -9,8 +9,9 @@ RUN CGO_ENABLED=0 go build cmd/main.go
 FROM ubuntu:20.04
 COPY . .
 
+ENV TZ=Russia/Moscow
 RUN apt-get -y update && apt-get install -y tzdata
-RUN ln -snf /usr/share/zoneinfo/Russia/Moscow /etc/localtime && echo $TZ > /etc/timezone
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 ENV PGVER 12
 RUN apt-get -y update && apt-get install -y postgresql-$PGVER

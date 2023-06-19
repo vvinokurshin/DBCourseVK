@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS threads (
     message text NOT NULL,
     votes int DEFAULT 0,
     slug citext UNIQUE,
-    created timestamp
+    created timestamptz DEFAULT NULL
 );
 
 CREATE TABLE IF NOT EXISTS posts (
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS posts (
     is_edited BOOLEAN NOT NULL,
     forum citext REFERENCES forums(slug) ON DELETE CASCADE,
     thread int REFERENCES threads(id) ON DELETE CASCADE,
-    created timestamp,
+    created timestamptz,
     post_tree int[] DEFAULT ARRAY []::integer[]
 );
 

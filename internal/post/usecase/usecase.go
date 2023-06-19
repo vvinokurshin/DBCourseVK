@@ -1,7 +1,6 @@
 package usecase
 
 import (
-	"github.com/go-openapi/strfmt"
 	"github.com/pkg/errors"
 	forumRepo "github.com/vvinokurshin/DBCourseVK/internal/forum/repository"
 	"github.com/vvinokurshin/DBCourseVK/internal/models"
@@ -80,7 +79,7 @@ func (uc *UseCase) CreatePosts(threadSlugOrID string, posts []models.Post) error
 
 	timeNow := time.Now()
 	for idx := range posts {
-		posts[idx].Created = strfmt.DateTime(timeNow)
+		posts[idx].Created = timeNow
 	}
 
 	err = uc.postRepo.InsertPosts(posts)
