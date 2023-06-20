@@ -8,6 +8,7 @@ import (
 	userRepo "github.com/vvinokurshin/DBCourseVK/internal/user/repository"
 	"github.com/vvinokurshin/DBCourseVK/pkg"
 	"strconv"
+	"time"
 )
 
 type UseCaseI interface {
@@ -60,6 +61,9 @@ func (uc *UseCase) CreateThread(thread *models.Thread) error {
 		}
 	}
 
+	if thread.Created == "" {
+		thread.Created = time.Now().Format("2006-01-02T15:04:05.999999Z")
+	}
 	thread.Forum = forum.Slug
 	thread.Author = user.Nickname
 

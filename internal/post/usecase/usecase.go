@@ -77,7 +77,7 @@ func (uc *UseCase) CreatePosts(threadSlugOrID string, posts []models.Post) error
 		}
 	}
 
-	timeNow := time.Now()
+	timeNow := time.Now().Format("2006-01-02T15:04:05.999999Z")
 	for idx := range posts {
 		posts[idx].Created = timeNow
 	}
